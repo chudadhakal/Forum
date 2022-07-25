@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forum</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="script.js"></script>
+
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="sitewrap">
+        <header>
+            <h1>Forum Users</h1>
+            <div id="menuwrap">
+                <li class="menuitem"><a href="/index.html">Home</a></li>
+                <li class="menuitem"><a href="/users.html">Users</a></li>
+                <li class="menuitem"><a href="/posts.html">Posts</a></li>
+            </div>
+        </header>
+        <div id="content">
+            <h2>Users</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Username</th>
+                    <th>Website</th>
+                    <th>Detail</th>
+                </tr>
+                </thead>
+                <tbody id="userslist">
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        $("document").ready(function(){
+            var users = "https://jsonplaceholder.typicode.com/users";
+            $.ajax({
+                url: users,
+                type: 'GET',
+                success: function(res){
+                    console.log(res);
+                    var rowsHtml = '';
+                    //loop through the list of users
+                    $.each(res, function(index, item){
+                        rowsHtml += '<tr><td>'+item.id+'</td><td>'+item.name+'</td><td>'+item.username+'</td><td>'+item.website+'</td><td><a href="/userdetail.html?id='+item.id+'">View</a></td><tr>';
+                    });
+                    $("#userslist").html(rowsHtml);
+                },
+                error: function(e){
+                    alert("Error: "+e);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

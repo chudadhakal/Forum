@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Forum Post Detail</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="script.js"></script>
+
+<link href="style.css" rel="stylesheet"/>
+</head>
+<body>
+    <div id="sitewrap">
+        <header>
+            <h1>Forum</h1>
+            <div id="menuwrap">
+                <li class="menuitem"><a href="/index.html">Home</a></li>
+                <li class="menuitem"><a href="/users.html">Users</a></li>
+                <li class="menuitem"><a href="/posts.html">Posts</a></li>
+            </div>
+        </header>
+        <div id="content">
+            <h2>Post Detail</h2>
+            <div id="detail">
+                <label>Post Id:</label><span id="postid"></span><br>
+                <label>Title:</label> <span id="title"></span><br>
+                <label>User Id:</label> <span id="userid"></span><br>
+                <label>Content:</label> <span id="postcontent"></span>
+            </div>
+        </div>
+    </div>
+<script>
+$("document").ready(function(){
+    const params = new URLSearchParams(window. location. search)
+    var user = 'https://jsonplaceholder.typicode.com/posts/'+params.get('id');
+        $.ajax({
+            url: user,
+            type: 'GET',
+            success: function(res){
+                $("#postid").text(res.id);
+                $("#title").text(res.title);
+                $("#userid").html('<a href="/userdetail.html?id='+res.id+'">1</a>');
+                $("#postcontent").text(res.body);
+            }
+        });
+
+    //get user's name
+    function getUserInfo(userid){
+        $.ajax({
+            url: 'https://jsonplaceholder.typicode.com/users/'+res.userid,
+            type: 'GET',
+            success: function(res){
+                $("#postid").text(res.id);
+                $("#title").text(res.title);
+                $("#userid").html('<a href="/userdetail.html?id='+res.id+'">1</a>');
+                $("#postcontent").text(res.body);
+            }
+        });
+    }
+});
+</script>
+</body>
+</html>
